@@ -1,0 +1,7 @@
+{
+    "dart.flutterSdkPath": "/home/sdtorresl/Programs/Flutter/bflow_client/.fvm/versions/3.16.5",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+    }
+}
