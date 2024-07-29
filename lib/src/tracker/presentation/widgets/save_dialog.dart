@@ -25,7 +25,11 @@ class SaveDialog extends StatelessWidget {
         ],
       ),
       actions: [
-        ElevatedButton(
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        FilledButton(
           onPressed: trackerController.isSubmitEnabled
               ? () {
                   trackerController.stopCron();

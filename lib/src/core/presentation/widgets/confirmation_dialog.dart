@@ -28,7 +28,7 @@ class ConfirmationDialog extends StatelessWidget {
           onPressed: onCancel,
           child: Text(cancelText),
         ),
-        TextButton(
+        FilledButton(
           onPressed: onConfirm,
           child: Text(confirmText),
         ),
