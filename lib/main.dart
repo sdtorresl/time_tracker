@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:time_tracker/src/core/data/datasources/database.dart';
 import 'package:time_tracker/src/tracker/data/datasources/tracker_local_datasource.dart';
 import 'package:time_tracker/src/tracker/data/repository/tracker_repository_impl.dart';
-import 'package:time_tracker/src/tracker/domain/repository/tracker_repository.dart';
+import 'package:time_tracker/src/tracker/presentation/controller/history_controller.dart';
 import 'package:time_tracker/src/tracker/presentation/controller/tracker_controller.dart';
 
 import 'src/app.dart';
@@ -33,6 +33,15 @@ void main() async {
           ),
         ),
         ChangeNotifierProvider(create: (context) => settingsController),
+        ChangeNotifierProvider<HistoryController>(
+          create: (context) => HistoryController(
+            trackerRepository: TrackerRepositoryImpl(
+              localDatasource: TrackerLocalDatasource(
+                databaseProvider: AppDatabase(),
+              ),
+            ),
+          ),
+        ),
       ],
       child: const MyApp(),
     ),

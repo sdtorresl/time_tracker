@@ -14,8 +14,15 @@ class HistoryController with ChangeNotifier {
   getItems() async {
     isLoading = true;
     notifyListeners();
-    trackerItems = await trackerRepository.list();
+    trackerItems = await trackerRepository.list()
+      ..sort((a, b) => b.startDate.compareTo(a.startDate));
     isLoading = false;
+    notifyListeners();
+  }
+
+  delete(Tracker tracker) async {
+    await trackerRepository.delete(tracker);
+    trackerItems.remove(tracker);
     notifyListeners();
   }
 }

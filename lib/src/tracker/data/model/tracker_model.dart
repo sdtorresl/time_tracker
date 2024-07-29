@@ -12,6 +12,7 @@ class TrackerModel extends Tracker implements Model<Tracker> {
   @override
   Tracker toEntity() {
     return Tracker(
+      id: id,
       startDate: startDate,
       duration: duration,
       activity: activity,
@@ -20,6 +21,7 @@ class TrackerModel extends Tracker implements Model<Tracker> {
 
   factory TrackerModel.fromEntity(Tracker entity) {
     return TrackerModel(
+      id: entity.id,
       startDate: entity.startDate,
       duration: entity.duration,
       activity: entity.activity,
