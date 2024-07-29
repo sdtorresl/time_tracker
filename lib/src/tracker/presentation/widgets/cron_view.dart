@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:time_tracker/src/core/extensions/duration.dart';
-import 'package:time_tracker/src/tracker/tracker_controller.dart';
+import 'package:time_tracker/src/tracker/presentation/controller/tracker_controller.dart';
 
 class CronView extends StatelessWidget {
   final TrackerController trackerController;
