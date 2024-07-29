@@ -55,18 +55,25 @@ class _HistoryViewWidgetState extends State<HistoryViewWidget> {
         return ListView(
           children: history.trackerItems
               .map(
-                (item) => ListTile(
-                  leading: IconButton(
-                    onPressed: () =>
-                        _showDeleteConfirmationDialog(context, item, history),
-                    icon: Icon(
-                      Icons.delete_outline,
-                      color: Theme.of(context).colorScheme.tertiary,
+                (item) => Column(
+                  children: [
+                    ListTile(
+                      leading: IconButton(
+                        onPressed: () => _showDeleteConfirmationDialog(
+                            context, item, history),
+                        icon: Icon(
+                          Icons.delete_outline,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ),
+                      title: Text(item.activity),
+                      subtitle: Text(item.startDate.toHumanReadable()),
+                      trailing: Text(item.duration.format()),
                     ),
-                  ),
-                  title: Text(item.activity),
-                  subtitle: Text(item.startDate.toHumanReadable()),
-                  trailing: Text(item.duration.format()),
+                    const Divider(
+                      thickness: 0.5,
+                    )
+                  ],
                 ),
               )
               .toList(),
