@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/src/core/data/datasources/database.dart';
+import 'package:time_tracker/src/core/extensions/datetime.dart';
 import 'package:time_tracker/src/core/extensions/duration.dart';
 import 'package:time_tracker/src/tracker/data/datasources/tracker_local_datasource.dart';
 import 'package:time_tracker/src/tracker/data/repository/tracker_repository_impl.dart';
@@ -34,7 +35,8 @@ class HistoryViewWidget extends StatelessWidget {
                       .map(
                         (item) => ListTile(
                           leading: Text(item.id?.toString() ?? ""),
-                          title: Text(item.startDate.toIso8601String()),
+                          title: Text(item.activity),
+                          subtitle: Text(item.startDate.toHumanReadable()),
                           trailing: Text(item.duration.format()),
                         ),
                       )

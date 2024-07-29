@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:time_tracker/src/core/data/datasources/database.dart';
+import 'package:time_tracker/src/tracker/data/datasources/tracker_local_datasource.dart';
+import 'package:time_tracker/src/tracker/data/repository/tracker_repository_impl.dart';
+import 'package:time_tracker/src/tracker/domain/repository/tracker_repository.dart';
+import 'package:time_tracker/src/tracker/presentation/controller/tracker_controller.dart';
 
 import 'src/app.dart';
 import 'src/settings/settings_controller.dart';
@@ -7,16 +13,28 @@ import 'src/settings/settings_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
   final settingsController = SettingsController(SettingsService());
 
   // Load the user's preferred theme while the splash screen is displayed.
   // This prevents a sudden theme change when the app is first displayed.
   await settingsController.loadSettings();
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => settingsController),
+        ChangeNotifierProvider(
+          create: (context) => TrackerController(
+            trackerRepository: TrackerRepositoryImpl(
+              localDatasource: TrackerLocalDatasource(
+                databaseProvider: AppDatabase(),
+              ),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider(create: (context) => settingsController),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }

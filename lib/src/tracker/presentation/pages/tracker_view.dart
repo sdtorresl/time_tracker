@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker/src/settings/settings_view.dart';
 import 'package:time_tracker/src/tracker/presentation/widgets/cron_view.dart';
 import 'package:time_tracker/src/tracker/presentation/controller/tracker_controller.dart';
@@ -16,7 +17,7 @@ class TrackerView extends StatefulWidget {
 }
 
 class _TrackerViewState extends State<TrackerView> {
-  final TrackerController trackerController = TrackerController();
+  late final TrackerController trackerController;
 
   final List<ButtonSegment<TrackerViews>> segments = [
     const ButtonSegment(
@@ -37,6 +38,7 @@ class _TrackerViewState extends State<TrackerView> {
   void initState() {
     super.initState();
     selected = {segments.first.value};
+    trackerController = context.read();
   }
 
   @override

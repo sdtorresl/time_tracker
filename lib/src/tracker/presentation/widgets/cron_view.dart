@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker/src/core/extensions/duration.dart';
 import 'package:time_tracker/src/tracker/presentation/controller/tracker_controller.dart';
+import 'package:time_tracker/src/tracker/presentation/widgets/save_dialog.dart';
 
 class CronView extends StatelessWidget {
   final TrackerController trackerController;
@@ -47,7 +49,7 @@ class CronView extends StatelessWidget {
                 child: Container(
                   margin: const EdgeInsets.only(top: 5),
                   child: FilledButton.icon(
-                    onPressed: trackerController.stopCron,
+                    onPressed: () => _onStopDialog(context),
                     icon: const Icon(Icons.stop_outlined),
                     label: const Text("Stop"),
                   ),
@@ -55,6 +57,18 @@ class CronView extends StatelessWidget {
               )
             : const SizedBox.shrink(),
       ],
+    );
+  }
+
+  void _onStopDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return ChangeNotifierProvider.value(
+          value: Provider.of<TrackerController>(context, listen: false),
+          child: const SaveDialog(),
+        );
+      },
     );
   }
 }

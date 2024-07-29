@@ -3,6 +3,7 @@ import 'package:time_tracker/src/tracker/domain/entity/tracker.dart';
 
 class TrackerModel extends Tracker implements Model<Tracker> {
   TrackerModel({
+    super.id,
     required super.startDate,
     required super.duration,
     required super.activity,
@@ -28,6 +29,7 @@ class TrackerModel extends Tracker implements Model<Tracker> {
   @override
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'startDate': startDate.toIso8601String(),
       'duration': duration.inSeconds,
       'activity': activity,
@@ -37,6 +39,7 @@ class TrackerModel extends Tracker implements Model<Tracker> {
   @override
   factory TrackerModel.fromMap(Map<String, dynamic> map) {
     return TrackerModel(
+      id: map['id'],
       startDate: DateTime.parse(map['startDate']),
       duration: Duration(seconds: map['duration']),
       activity: map['activity'],
