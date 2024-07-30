@@ -10,6 +10,7 @@ environment:
   sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
+  audioplayers: ^6.0.0
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -34,3 +35,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - assets/sounds/

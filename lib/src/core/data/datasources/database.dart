@@ -48,9 +48,6 @@ class AppDatabase {
       activity TEXT NOT NULL
     )
     ''');
-
-    await db.execute(
-        'INSERT INTO tracker (startDate, duration, activity) VALUES(\'2024-07-28T23:49:46.288Z\',72, \'Something\')');
   }
 
   FutureOr<void> _onConfigure(Database db) async {}
